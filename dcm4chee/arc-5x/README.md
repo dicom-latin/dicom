@@ -1,6 +1,6 @@
 # Installación de dcm4chee-arc-light 5.x (PostgreSQL)
 
-Instrucciones para hacer la instalación desde cero de Dcm4chee Arc Light 5.x con soporte de PostgreSQL. Aunque el archivo es un bash script aun no esta totalmente automatizado, así que para realizar la instalación por ahora se recomienda ejecutar la comando manualmente y leer los comentarios.
+Instrucciones para hacer la instalación desde cero de Dcm4chee Arc Light 5.x con soporte de PostgreSQL. Aunque el archivo es un bash script aun no esta totalmente automatizado, así que para realizar la instalación por ahora se recomienda ejecutar los comandos manualmente y leer los comentarios.
 
 Adicionalmente la instalación a sido probada en Debian 9, queda por darle soporte a las demás distribuciones
 
