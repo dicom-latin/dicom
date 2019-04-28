@@ -47,7 +47,7 @@ sudo apt install -y openjdk-8-jre
 
 # Instalamos Postgresql
 cd $HOME
-aptitude install postgresql #como root
+apt install -y postgresql #como root
 
 #Configuramos la base de datos
 su postgres
