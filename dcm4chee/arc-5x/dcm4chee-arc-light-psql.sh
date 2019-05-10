@@ -116,10 +116,10 @@ unzip $DCM4CHEE_ARC/jboss-modules/jclouds-jboss-modules-2.0.2-noguava.zip
 unzip $DCM4CHEE_ARC/jboss-modules/ecs-object-client-jboss-modules-3.0.0.zip
 unzip $DCM4CHEE_ARC/jboss-modules/jdbc-jboss-modules-1.0.0-psql.zip
 
-PSQL_CONECTOR_ORIG='"postgresql-41.0.3.jar"'   #Corroborar si realmente tiene estos valores antes de modificarlo (cambia segun el caso)
+PSQL_CONECTOR_ORIG='"postgresql-41.0.3.jar"'   # Corroborar si realmente tiene estos valores antes de modificarlo (cambia segun el caso)
 PSQL_CONECTOR_DEST='"postgresql-42.2.5.jar"'
 sed -i "s/$PSQL_CONECTOR_ORIG/$PSQL_CONECTOR_DEST/g" $WILDFLY_HOME/modules/org/postgresql/main/module.xml
-#Copiar postgresql-42.2.5.jar de la ruta de descarga que estaria en /opt/dcm4chee o $DCM4CHEE_ARC/../postgresql-42.2.5.jar
+# Copiar postgresql-42.2.5.jar a la ruta $WILDFLY_HOME/modules/org/postgresql/main
 
 # Levanta el servidor
 $WILDFLY_HOME/bin/standalone.sh -c dcm4chee-arc.xml & #El & es para que quede en segundo plano
