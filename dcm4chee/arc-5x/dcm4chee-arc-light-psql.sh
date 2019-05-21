@@ -49,7 +49,14 @@ sudo apt install -y openjdk-8-jre
 cd $HOME
 apt install -y postgresql #como root
 
-#Configuramos la base de datos
+# Configuramos la base de datos
+# En algunos casos se ha reportado el siguiente error:
+#     /usr/lib/postgresql/9.6/bin/psql: /usr/local/lib/libldap_r-2.4.so.2: no version information available (required by /usr/lib/x86_64-linux-gnu/libpq.so.5)
+# Este error podría ser que libcurl se compiló con una versión de libldap_r diferente a la que 
+# tiene en /usr/local/lib. Una solución sería crear enlaces simbólicos con los archivos que faltan de esta manera:
+# $ sudo ln -fs /usr/lib/liblber-2.4.so.2 /usr/local/lib/
+# $ sudo ln -fs /usr/lib/libldap_r-2.4.so.2 /usr/local/lib/
+
 su postgres
 createuser -DRSP bdpacs     #usuario se usa bdpacs pero usuario y  password los que consideren convenientes
 psql
