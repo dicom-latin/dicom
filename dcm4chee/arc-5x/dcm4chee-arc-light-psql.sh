@@ -4,8 +4,9 @@
 # Instalanción desatendida de Dcm4chee Arc Light
 
 # Actualizamos el sistema operativo como root -- si no se especifica no usar root
+rm -rf /etc/apt/trusted.gpg
 apt update && sudo apt -y upgrade                                           #como SUPERUSER
-apt install unzip gcc build-essential libdb-dev libtool libltdl-dev -y      #como SUPERUSER
+apt install unzip gcc build-essential software-properties-common libdb-dev libtool libltdl-dev dirmngr -y      #como SUPERUSER
 
 # Nos ubicamos en el directorio home del usuario actual
 cd $HOME
@@ -15,12 +16,12 @@ mkdir dcm4chee
 cd dcm4chee
 
 # Descargamos los paquetes que vamos a necesitar para construir Dcm4chee Arc Light
-wget http://download.oracle.com/berkeley-db/db-5.0.32.tar.gz
-#wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.45.tgz
+wget --no-check-certificate http://download.oracle.com/berkeley-db/db-5.0.32.tar.gz
+wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.47.tgz
 wget http://www.linuxfromscratch.org/patches/blfs/8.1/openldap-2.4.45-consolidated-1.patch
-wget https://sourceforge.net/projects/dcm4che/files/dcm4chee-arc-light5/5.13.0/dcm4chee-arc-5.13.0-psql.zip/download?use_mirror=phoenixnap&r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fdcm4che%2Ffiles%2Fdcm4chee-arc-light5%2F5.13.0%2F&use_mirror=phoenixnap -O dcm4chee-arc-5.13.0-psql.zip
-wget https://download.jboss.org/wildfly/12.0.0.Final/wildfly-12.0.0.Final.zip
-wget https://jdbc.postgresql.org/download/postgresql-42.2.5.jar
+wget --no-check-certificate https://sourceforge.net/projects/dcm4che/files/dcm4chee-arc-light5/5.13.0/dcm4chee-arc-5.13.0-psql.zip/download?use_mirror=phoenixnap&r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fdcm4che%2Ffiles%2Fdcm4chee-arc-light5%2F5.13.0%2F&use_mirror=phoenixnap -O dcm4chee-arc-5.13.0-psql.zip
+wget --no-check-certificate https://download.jboss.org/wildfly/12.0.0.Final/wildfly-12.0.0.Final.zip
+wget --no-check-certificate https://jdbc.postgresql.org/download/postgresql-42.2.5.jar
 
 tar zxvf db-5.0.32.tar.gz
 tar xvf openldap-2.4.47.tgz
@@ -28,12 +29,12 @@ unzip dcm4chee-arc-5.13.0-psql.zip
 unzip wildfly-12.0.0.Final.zip
 
 # Movemos algunas carpetas
-mv dcm4chee-arc-5.13.0-mysql dcm4chee
+mv dcm4chee-arc-5.13.0-psql dcm4chee
 mv wildfly-12.0.0.Final jboss
 cd ..
 
 # Movemos la carpeta dcm4chee a /opt
-sudo mv dcm4chee /opt/
+mv dcm4chee /opt/
 
 # Exportamos alguna variables
 echo "export DCM4CHEE_ARC='/opt/dcm4chee/dcm4chee'" >> $HOME/.bashrc
@@ -41,9 +42,8 @@ echo "export WILDFLY_HOME='/opt/dcm4chee/jboss'" >> $HOME/.bashrc
 source $HOME/.bashrc
 
 # Instalamos JRE8
-sudo add-apt-repository -y ppa:openjdk-r/ppa
-sudo apt update && sudo apt -y upgrade
-sudo apt install -y openjdk-8-jre
+apt-get install openjdk-8-jdk-headless
+apt-get install openjdk-8-jdk
 
 # Instalamos Postgresql
 cd $HOME
